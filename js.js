@@ -17,6 +17,8 @@ const gallery = {
     openedImageScreenClass: 'galleryWrapper__screen',
     openedImageCloseBtnClass: 'galleryWrapper__close',
     openedImageCloseBtnSrc: 'images/close.png',
+    errorImageClass: 'error_img',
+    errorImageSrc: 'images/error-img.jpg',
   },
 
   /**
@@ -56,6 +58,8 @@ const gallery = {
   openImage(src) {
     // Получаем контейнер для открытой картинки, в нем находим тег img и ставим ему нужный src.
     this.getScreenContainer().querySelector(`.${this.settings.openedImageClass}`).src = src;
+
+    
   },
 
   /**
@@ -99,6 +103,12 @@ const gallery = {
     const image = new Image();
     image.classList.add(this.settings.openedImageClass);
     galleryWrapperElement.appendChild(image);
+    
+    image.onerror = () => { //если картинка не найдена - вставляем картинку с сообщением об ошибке.
+        image.classList.remove(this.settings.openedImageClass);
+        image.classList.add(this.settings.errorImageClass);
+        image.src = this.settings.errorImageSrc;
+    };
 
     // Добавляем контейнер-обертку в тег body.
     document.body.appendChild(galleryWrapperElement);

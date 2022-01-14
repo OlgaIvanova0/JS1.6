@@ -5,16 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Homework4</title>
+    <title>Homework6</title>
 </head>
 <body>
     <h1>Домашняя работа 6 урок</h1>
+    <h3>Задание 1</h3>
     <div class="galleryPreviewsContainer">
         <img src="images/min/1.jpg" data-full_image_url="images/max/1.jpg" alt="Картинка1">
         <img src="images/min/2.jpg" data-full_image_url="images/max/2.jpg" alt="Картинка2">
         <img src="images/min/3.jpg" data-full_image_url="images/max/3.jpg" alt="Картинка3">
         <img src="images/min/4.jpg" data-full_image_url="images/max/4.jpg" alt="Картинка4">
-      </div>
+    </div>
+    <h3>Задание 2 <br>
+        Корзина:
+    </h3>
+    <div class="basket">
+        <div class="item">
+            <img src="images/basket/1.png" class="basketImg" alt="Карандаши">
+            <p>Цена: 50 руб.</p>
+            <button class="buyBt" data-price="50" data-name="Карандаши">Купить</button>
+        </div>
+        <div class="item">
+            <img src="images/basket/2.jpg" class="basketImg" alt="Степлер">
+            <p>Цена: 150 руб.</p>
+            <button class="buyBt" data-price="150" data-name="Степлер">Купить</button>
+        </div>
+        <div class="item">
+            <img src="images/basket/3.jpg" class="basketImg" alt="Маркеры">
+            <p>Цена: 100 руб.</p>
+            <button class="buyBt" data-price="100" data-name="Маркеры">Купить</button>
+        </div>
+    </div>
+    <div class="basketTotal">
+        <h3>
+            Количество товаров: 
+            <span id="basket-count">0</span><br>
+            Итого:
+            <span id="basket-price">0</span>
+        </h3>
+    </div>
+
 <script src="js.js"></script>   
 </body>
 </html>

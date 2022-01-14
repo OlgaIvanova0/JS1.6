@@ -27,3 +27,26 @@
     top: 0;
     right: 0;
   }
+.error_img {
+    max-height: 80%;
+    max-width: 80%;
+    z-index: 101;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+.basket{
+    display: flex;
+    flex-direction: column;
+
+}
+.item {
+  width: 500px;
+  height: 260px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
