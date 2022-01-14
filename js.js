@@ -1,5 +1,7 @@
 "use strict";
-
+/*Задание 1.Доработать функцию замены картинки в галерее таким образом, чтобы она проверяла наличие большой
+картинки по указанному в src адресу. Если такой картинки не существует или она не доступна, то должна
+ставиться картинка-заглушка сообщающая об ошибке.*/
 /**
  * @property {Object} settings Объект с настройками галереи.
  * @property {string} settings.previewSelector Селектор обертки для миниатюр галереи.
@@ -20,7 +22,6 @@ const gallery = {
     errorImageClass: 'error_img',
     errorImageSrc: 'images/error-img.jpg',
   },
-
   /**
    * Инициализирует галерею, ставит обработчик события.
    * @param {Object} userSettings Объект настроек для галереи.
@@ -28,7 +29,6 @@ const gallery = {
   init(userSettings = {}) {
     // Записываем настройки, которые передал пользователь в наши настройки.
     Object.assign(this.settings, userSettings);
-
     // Находим элемент, где будут превью картинок и ставим обработчик на этот элемент,
     // при клике на этот элемент вызовем функцию containerClickHandler в нашем объекте
     // gallery и передадим туда событие MouseEvent, которое случилось.
@@ -36,7 +36,6 @@ const gallery = {
       .querySelector(this.settings.previewSelector)
       .addEventListener('click', event => this.containerClickHandler(event));
   },
-
   /**
    * Обработчик события клика для открытия картинки.
    * @param {MouseEvent} event Событие клики мышью.
@@ -50,18 +49,14 @@ const gallery = {
     // Открываем картинку с полученным из целевого тега (data-full_image_url аттрибут).
     this.openImage(event.target.dataset.full_image_url);
   },
-
   /**
    * Открывает картинку.
    * @param {string} src Ссылка на картинку, которую надо открыть.
    */
   openImage(src) {
     // Получаем контейнер для открытой картинки, в нем находим тег img и ставим ему нужный src.
-    this.getScreenContainer().querySelector(`.${this.settings.openedImageClass}`).src = src;
-
-    
+    this.getScreenContainer().querySelector(`.${this.settings.openedImageClass}`).src = src;   
   },
-
   /**
    * Возвращает контейнер для открытой картинки, либо создает такой контейнер, если его еще нет.
    * @returns {Element}
@@ -73,11 +68,9 @@ const gallery = {
     if (galleryWrapperElement) {
       return galleryWrapperElement;
     }
-
     // Возвращаем полученный из метода createScreenContainer контейнер.
     return this.createScreenContainer();
   },
-
   /**
    * Создает контейнер для открытой картинки.
    * @returns {HTMLElement}
@@ -86,19 +79,16 @@ const gallery = {
     // Создаем сам контейнер-обертку и ставим ему класс.
     const galleryWrapperElement = document.createElement('div');
     galleryWrapperElement.classList.add(this.settings.openedImageWrapperClass);
-
     // Создаем контейнер занавеса, ставим ему класс и добавляем в контейнер-обертку.
     const galleryScreenElement = document.createElement('div');
     galleryScreenElement.classList.add(this.settings.openedImageScreenClass);
     galleryWrapperElement.appendChild(galleryScreenElement);
-
     // Создаем картинку для кнопки закрыть, ставим класс, src и добавляем ее в контейнер-обертку.
     const closeImageElement = new Image();
     closeImageElement.classList.add(this.settings.openedImageCloseBtnClass);
     closeImageElement.src = this.settings.openedImageCloseBtnSrc;
     closeImageElement.addEventListener('click', () => this.close());
     galleryWrapperElement.appendChild(closeImageElement);
-
     // Создаем картинку, которую хотим открыть, ставим класс и добавляем ее в контейнер-обертку.
     const image = new Image();
     image.classList.add(this.settings.openedImageClass);
@@ -112,11 +102,9 @@ const gallery = {
 
     // Добавляем контейнер-обертку в тег body.
     document.body.appendChild(galleryWrapperElement);
-
     // Возвращаем добавленный в body элемент, наш контейнер-обертку.
     return galleryWrapperElement;
   },
-
   /**
    * Закрывает (удаляет) контейнер для открытой картинки.
    */
@@ -124,6 +112,41 @@ const gallery = {
     document.querySelector(`.${this.settings.openedImageWrapperClass}`).remove();
   }
 };
-
 // Инициализируем нашу галерею при загрузке страницы.
 window.onload = () => gallery.init({previewSelector: '.galleryPreviewsContainer'});
+
+/*Задание 2.Реализовать модуль корзины. У каждого товара есть кнопка «Купить», при нажатии на которую
+происходит добавление имени и цены товара в блок корзины. Корзина должна уметь считать
+общую сумму заказа. Один товар можно добавить несколько раз.*/
+
+const basket = {
+settings:{
+    countSelector: '#basket-count',
+    priceSelector: '#basket-price',
+},
+goods: [], //список купленных товаров
+countEl: null, //место для показа количества товаров
+priceEl: null, //место для показа цены товаров
+};
+
+const init = () => {
+    const elems = document.querySelectorAll('button');
+    console.log(elems);
+        for (const elem of elems){
+            elem.addEventListener('click', () => {
+               const price = elem.dataset.price;
+               const name = elem.dataset.name;
+               console.log(price, name);
+            });
+        };  
+};
+init();
+
+
+
+
+
+
+
+
+
