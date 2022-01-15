@@ -50,3 +50,22 @@
   justify-content: space-around;
   align-items: center;
 }
+.btnNext, .btnPrew {
+    display: block;
+    font-weight: 700;
+    width: 50px;
+    min-height: 50px;
+    background-color: blanchedalmond;
+    z-index: 101;
+    position: absolute;
+    margin: auto;
+}
+
+.btnNext {
+    top: 170px;
+    right: 0;
+}
+.btnPrew {
+    top: 170px;
+    left: 0;
+}

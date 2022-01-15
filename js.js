@@ -21,6 +21,11 @@ const gallery = {
     openedImageCloseBtnSrc: 'images/close.png',
     errorImageClass: 'error_img',
     errorImageSrc: 'images/error-img.jpg',
+    buttonNextClass: 'btnNext',
+    buttonNextText: '>>',
+    buttonPrewClass: 'btnPrew',
+    buttonPrewText: '<<',
+
   },
   /**
    * Инициализирует галерею, ставит обработчик события.
@@ -89,6 +94,18 @@ const gallery = {
     closeImageElement.src = this.settings.openedImageCloseBtnSrc;
     closeImageElement.addEventListener('click', () => this.close());
     galleryWrapperElement.appendChild(closeImageElement);
+    // Создаем кнопку вперед
+    const btnNext = document.createElement('button');
+    btnNext.textContent = this.settings.buttonNextText;
+    btnNext.classList.add(this.settings.buttonNextClass);
+    btnNext.addEventListener('click', () => this.nextImg());
+    galleryWrapperElement.appendChild(btnNext);
+    //создаем кнопку назад
+    const btnPrew = document.createElement('button');
+    btnPrew.textContent = this.settings.buttonPrewText;
+    btnPrew.classList.add(this.settings.buttonPrewClass);
+    btnPrew.addEventListener('click', () => this.prewImg());
+    galleryWrapperElement.appendChild(btnPrew);
     // Создаем картинку, которую хотим открыть, ставим класс и добавляем ее в контейнер-обертку.
     const image = new Image();
     image.classList.add(this.settings.openedImageClass);
@@ -110,7 +127,10 @@ const gallery = {
    */
   close() {
     document.querySelector(`.${this.settings.openedImageWrapperClass}`).remove();
-  }
+  },
+  nextImg(){
+
+  },
 };
 // Инициализируем нашу галерею при загрузке страницы.
 window.onload = () => gallery.init({previewSelector: '.galleryPreviewsContainer'});
