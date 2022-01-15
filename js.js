@@ -120,27 +120,35 @@ window.onload = () => gallery.init({previewSelector: '.galleryPreviewsContainer'
 общую сумму заказа. Один товар можно добавить несколько раз.*/
 
 const basket = {
-settings:{
-    countSelector: '#basket-count',
-    priceSelector: '#basket-price',
-},
 goods: [], //список купленных товаров
-countEl: null, //место для показа количества товаров
-priceEl: null, //место для показа цены товаров
+countEl: 0, //количество товаров
+priceEl: 0, //место для показа общей суммы товаров
 };
 
 const init = () => {
-    const elems = document.querySelectorAll('button');
-    console.log(elems);
-        for (const elem of elems){
+    const elems = document.querySelectorAll('button'); //нашли кнопки
+       for (const elem of elems){
             elem.addEventListener('click', () => {
-               const price = elem.dataset.price;
+               const price = elem.dataset.price; 
                const name = elem.dataset.name;
-               console.log(price, name);
+               basket.goods.push({name: name, price: +price}); //записываем все купленные товары 
+               basket.countEl++; //считаем количество товаров
+               basket.priceEl = basket.priceEl + +price; //считаем общую сумму 
+
+               const countTotal = document.getElementById('basket-count'); //нашли куда выводить количество
+               const priceTotal = document.getElementById('basket-price'); //нашли куда вывести сумму
+               countTotal.innerText = basket.countEl; //выводим итоги
+               priceTotal.textContent = basket.priceEl;
             });
-        };  
+       };  
 };
 init();
+
+/*Задание 3. 3*. Добавить в галерею функцию перехода к следующему изображению. По сторонам от большой картинки
+должны быть стрелки “вперед” и “назад”, по нажатию на которые происходит замена изображения на
+следующее или предыдущее.*/
+
+
 
 
 
