@@ -25,6 +25,10 @@ const gallery = {
     buttonNextText: '>>',
     buttonPrewClass: 'btnPrew',
     buttonPrewText: '<<',
+    openImgSrc: null,
+    nextImgSrc: null,
+    prewImgSrc: null,
+    lastImgSrc: null,
 
   },
   /**
@@ -50,9 +54,10 @@ const gallery = {
     // Если целевой тег не был картинкой, то ничего не делаем, просто завершаем функцию.
     if (event.target.tagName !== 'IMG') {
       return;
-    }
+    } 
     // Открываем картинку с полученным из целевого тега (data-full_image_url аттрибут).
     this.openImage(event.target.dataset.full_image_url);
+    this.settings.openImgSrc = event.target.dataset.full_image_url;        
   },
   /**
    * Открывает картинку.
@@ -98,8 +103,8 @@ const gallery = {
     const btnNext = document.createElement('button');
     btnNext.textContent = this.settings.buttonNextText;
     btnNext.classList.add(this.settings.buttonNextClass);
-    btnNext.addEventListener('click', () => this.nextImg());
     galleryWrapperElement.appendChild(btnNext);
+    btnNext.addEventListener('click', () => this.nextImg());
     //создаем кнопку назад
     const btnPrew = document.createElement('button');
     btnPrew.textContent = this.settings.buttonPrewText;
@@ -114,7 +119,8 @@ const gallery = {
     image.onerror = () => { //если картинка не найдена - вставляем картинку с сообщением об ошибке.
         image.classList.remove(this.settings.openedImageClass);
         image.classList.add(this.settings.errorImageClass);
-        image.src = this.settings.errorImageSrc;
+        image.src = this.settings.errorImageSrc; 
+        this.settings.openedImageClass = this.settings.errorImageClass;  
     };
 
     // Добавляем контейнер-обертку в тег body.
@@ -129,7 +135,23 @@ const gallery = {
     document.querySelector(`.${this.settings.openedImageWrapperClass}`).remove();
   },
   nextImg(){
-
+    let gallery = document.getElementsByClassName('imgGallery');
+    if (+this.settings.openImgSrc[11] < gallery.length){
+      this.settings.nextImgSrc = this.settings.openImgSrc.substr(0, 11) + (+this.settings.openImgSrc[11] + 1) + this.settings.openImgSrc.substr(12, 15);
+    } else {
+      this.settings.nextImgSrc = this.settings.openImgSrc.substr(0, 11) + (+this.settings.openImgSrc[11] - 3) + this.settings.openImgSrc.substr(12, 15);
+    };
+    this.openImage(this.settings.nextImgSrc);
+    this.settings.openImgSrc = this.settings.nextImgSrc;  
+  },
+  prewImg(){ 
+    if (+this.settings.openImgSrc[11] > 1){
+    this.settings.prewImgSrc = this.settings.openImgSrc.substr(0, 11) + (+this.settings.openImgSrc[11] - 1) + this.settings.openImgSrc.substr(12, 15);
+  } else {
+    this.settings.prewImgSrc = this.settings.openImgSrc.substr(0, 11) + (+this.settings.openImgSrc[11] + 3) + this.settings.openImgSrc.substr(12, 15);
+  };
+  this.openImage(this.settings.prewImgSrc);
+  this.settings.openImgSrc = this.settings.prewImgSrc; 
   },
 };
 // Инициализируем нашу галерею при загрузке страницы.
