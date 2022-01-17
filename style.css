@@ -40,11 +40,9 @@
 }
 .basket{
     display: flex;
-    flex-direction: column;
-
 }
 .item {
-  width: 500px;
+  width: 450px;
   height: 260px;
   display: flex;
   justify-content: space-around;

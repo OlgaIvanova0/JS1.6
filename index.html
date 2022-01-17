@@ -10,6 +10,7 @@
 <body>
     <h1>Домашняя работа 6 урок</h1>
     <h3>Задание 1</h3>
+    <h3>Задание 3</h3>
     <div class="galleryPreviewsContainer">
         <img src="images/min/1.jpg" class="imgGallery" data-full_image_url="images/max/1.jpg" alt="Картинка1">
         <img src="images/min/2.jpg" class="imgGallery" data-full_image_url="images/max/2.jpg" alt="Картинка2">
@@ -43,6 +44,39 @@
             Итого:
             <span id="basket-price">0</span>
         </h3>
+    </div>
+    <div>
+        <h3>Задание 4*</h3>
+        <p>
+            Задание-вопрос, ответить надо будет просто текстом. В нашем приложении, 
+            "галерея", что делали на занятии, есть куски наподобие этих: <br>
+
+            <h5>
+            document <br>
+            .querySelector(this.settings.previewSelector)  <br>
+            .addEventListener('click', event => this.containerClickHandler(event)); <br>
+            closeImageElement.addEventListener('click', () => this.close()); <br>
+            </h5>
+
+            Почему в обоих случаях мы писали функцию, которая вызывает другую функцию? Т.е. 
+            мы ведь в addEventListener должны передать строку на какое событие вешаем обработчик <br>
+            и функцию, которая должна будет вызываться, почему например вместо: <br>
+            <h5>
+            closeImageElement.addEventListener('click', () => this.close()); <br>
+
+            мы не написали <br>
+
+            closeImageElement.addEventListener('click', this.close); <br>
+            </h5>
+
+            Это ведь тоже было бы корректно и валидно, функция бы успешно запускалась при клике 
+            на элемент, но почему мы так не сделали? Что меняется при разных вариантах? Почему? <br>
+            Ответ запишите просто текстовым файлом. 
+            Эта тема пока не пройдена, но хочется чтобы вы покопались, посмотрели в чем проблема. <br>
+        </p>
+        <h3>Ответ: ...хз...может потому, что так код не работает...Я пыталась его поставить в задачу - не сработало, выдал ошибку в функции this.close</h3>
+
+    
     </div>
 
 <script src="js.js"></script>   
